@@ -4,15 +4,11 @@ import { alunoSchema } from '@/lib/schemas/aluno';
 
 export async function POST(req: NextRequest) {
   try {
-    console.log('Recebendo requisição POST /api/alunos');
-
     const body = await req.json();
-    console.log('Body recebido:', body);
 
     const validationResult = alunoSchema.safeParse(body);
 
     if (!validationResult.success) {
-      console.log('❌ Validação falhou:', validationResult.error);
       return NextResponse.json(
         {
           message: 'Dados inválidos',
@@ -22,12 +18,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.log('Validação passou, chamando service...');
-
     const result = await createAluno(validationResult.data);
-
-    console.log('Aluno criado com sucesso:', result.aluno?.id_aluno);
-
     return NextResponse.json(result, { status: 201 });
 
   } catch (error: any) {

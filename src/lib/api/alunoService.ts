@@ -23,13 +23,8 @@ export async function createAluno(
   data: AlunoSchema
 ): Promise<CreateAlunoResponse> {
   try {
-    console.log('Gerando hash da senha...');
     const senha_hash = await bcrypt.hash(data.senha, 10);
-
-    console.log('Gerando UUID...');
     const id_aluno = uuidv4();
-
-    console.log('Inserindo aluno no banco...');
     const aluno = await prisma.aluno.create({
       data: {
         id_aluno,
@@ -46,8 +41,6 @@ export async function createAluno(
         email_aluno: true,
       },
     });
-
-    console.log('Aluno criado:', aluno.id_aluno);
 
     return {
       message: 'Aluno cadastrado com sucesso!',
