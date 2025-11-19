@@ -1,0 +1,21 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+model Aluno {
+  id_aluno       String   @id @default(uuid()) @db.Char(36)
+  nome_completo  String   @db.VarChar(150)
+  usuario_acesso String   @db.VarChar(50) @unique
+  senha_hash     String   @db.VarChar(255)
+  email_aluno    String   @db.VarChar(150) @unique
+  observacao     String?  @db.VarChar(300)
+  data_cadastro  DateTime @default(now())
+
+  @@map("alunos")
+}
