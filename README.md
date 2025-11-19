@@ -21,7 +21,3 @@ Create a .env file in root directory
 ```bash
 DATABASE_URL="mysql://user:pass@serverurl:3306/table"
 ```
-```
-```
-```
-```
